@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Prediction{% endblock title %}
+{% block body %}
+<div class="container mt-5">
+    <h1>
+        {% if prediction %}
+        <span class="badge bg-success">The predicted insurance cost is ${{ prediction|floatformat:2 }}</span>
+        {% endif %}
+    </h1>
+    <h2 class="mb-4">Health Information Form</h2>
+    <form method="POST" action="/prediction" id="health-info-form">
+        {% csrf_token %}
+        <!-- Age Field -->
+        <div class="mb-3">
+            <label for="age" class="form-label">Age</label>
+            <input type="number" class="form-control" id="age" name="age" placeholder="Enter your age" required>
+        </div>
+    
+        <!-- Sex Field -->
+        <div class="mb-3">
+            <label for="sex" class="form-label">Sex</label>
+            <select class="form-select" id="sex" name="sex" required>
+                <option value="">Select your sex</option>
+                <option value="0">Male</option>
+                <option value="1">Female</option>
+            </select>
+        </div>
+    
+        <!-- BMI Field -->
+        <div class="mb-3">
+            <label for="bmi" class="form-label">BMI</label>
+            <input type="number" step="0.01" class="form-control" id="bmi" name="bmi" placeholder="Enter your BMI" required>
+        </div>
+    
+        <!-- Children Field -->
+        <div class="mb-3">
+            <label for="children" class="form-label">Number of Children</label>
+            <input type="number" class="form-control" id="children" name="children" placeholder="Enter number of children" required>
+        </div>
+    
+        <!-- Smoker Field -->
+        <div class="mb-3">
+            <label for="smoker" class="form-label">Smoker</label>
+            <select class="form-select" id="smoker" name="smoker" required>
+                <option value="">Are you a smoker?</option>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+        </div>
+    
+        <!-- Region Field -->
+        <div class="mb-3">
+            <label for="region" class="form-label">Region</label>
+            <select class="form-select" id="region" name="region" required>
+                <option value="">Select your region</option>
+                <option value="1">Northeast</option>
+                <option value="2">Northwest</option>
+                <option value="3">Southeast</option>
+                <option value="4">Southwest</option>
+            </select>
+        </div>
+    
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock body %}
+
